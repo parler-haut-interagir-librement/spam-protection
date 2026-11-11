@@ -1,0 +1,47 @@
+{
+    "name": "phil/spam-protection",
+    "description": "Spam signals without a captcha, in plain PHP: signed submission tokens, timing, a proof of work, content rules, and the inspection that collects their signals",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "anti-spam",
+        "honeypot",
+        "proof-of-work",
+        "spam"
+    ],
+    "authors": [
+        {
+            "name": "Philippe Gamache",
+            "email": "philippe@ph-il.ca",
+            "homepage": "https://github.com/ph-il",
+            "role": "Developer"
+        }
+    ],
+    "homepage": "https://ph-il.ca",
+    "require": {
+        "php": ">=8.5",
+        "ext-mbstring": "*",
+        "ext-sodium": "*",
+        "symfony/string": "^8.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^13.4"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Phil\\SpamProtection\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Phil\\SpamProtection\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-main": "0.1.x-dev"
+        }
+    }
+}
