@@ -1,4 +1,4 @@
-<!-- phil-dev source-sha256=891ca92bd71fbd1f7da1f62404730ca03753d26980b84a524a633e4360079b98 -->
+<!-- phil-dev source-sha256=5da75b924c83120d4485065b1e76233cc354371ac64bc34b555cf192562d27e1 -->
 # Signaux
 
 | Vérification | Type | Signaux |
@@ -8,7 +8,7 @@
 | Le temps qu'a pris le remplissage | `TimingPolicy::check($issuedAt, $now)` | `TooFast`, `TokenExpired` |
 | Un jeton envoyé deux fois | le stockage des jetons utilisés de l'application | `TokenReplayed` |
 | La preuve de travail | `ProofOfWork::verify($nonce, $solution)` | `ProofInvalid` |
-| Le texte | `ContentRules::inspect($text)` | `TooLong`, `TooManyLinks`, `ForbiddenTerm`, `Gibberish` |
+| Le texte | `ContentRules::inspect($text)` | `Malformed`, `TooLong`, `TooManyLinks`, `ForbiddenTerm`, `Gibberish` |
 | La fréquence des envois d'un client | le limiteur de débit de l'application | `RateLimited` |
 
 `Inspection::clean()->with(...$signals)` les rassemble, chacun une fois, dans l'ordre où ils ont été levés ;
@@ -39,6 +39,9 @@ comporte que des chiffres décimaux, au plus 12. Une difficulté de 0 n'exige ri
 
 `new ContentRules(maximumLinks: 3, forbiddenTerms: ['casino'], detectGibberish: true, maximumLength: 20_000)` :
 
+- **l'encodage** : un texte qui n'est pas de l'UTF-8 valide, ce qu'aucun navigateur n'envoie, lève `Malformed` ; il est
+  lu malgré tout, chaque séquence invalide remplacée comme le fait `mb_scrub()`, pour que les autres signaux soient
+  levés aussi et que les octets d'un robot n'arrêtent jamais l'inspection ;
 - **la longueur** se compte en caractères ; un texte plus long que `maximumLength` lève `TooLong`, et seuls ses
   `maximumLength` premiers caractères sont lus pour les liens, les termes et le charabia : le coût d'une inspection
   est ainsi borné, quoi qu'on envoie. La valeur par défaut est `ContentRules::DEFAULT_MAXIMUM_LENGTH`, 20 000, et

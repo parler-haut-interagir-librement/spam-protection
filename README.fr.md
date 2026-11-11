@@ -1,12 +1,12 @@
-<!-- phil-dev source-sha256=4c917b8c091d89d0d63c8656b02628a0e770c61ddf50b74622e9a6d235025506 -->
+<!-- phil-dev source-sha256=1e6ab3eb520fe8e18d97324be751eb13a09db6e287f9d28fa8ef3437c0b6d61d -->
 # phil/spam-protection
 
 **Repérez le pourriel dans l'envoi d'un formulaire sans captcha, en PHP simple.**
 
 phil/spam-protection vérifie un envoi selon plusieurs signaux. Un jeton signé (HMAC-SHA256) dit où et quand le
 formulaire a été rendu, et `TimingPolicy` juge le temps qu'a pris le remplissage. `ProofOfWork` vérifie un petit
-calcul qu'a fait le navigateur. `ContentRules` examine le texte à la recherche de trop de liens, de termes interdits
-et de charabia. Chaque vérification lève un `Signal`, et une `Inspection` les rassemble. Chaque signal est une
+calcul qu'a fait le navigateur. `ContentRules` examine le texte à la recherche d'octets qui ne sont pas de l'UTF-8,
+de trop de liens, de termes interdits et de charabia. Chaque vérification lève un `Signal`, et une `Inspection` les rassemble. Chaque signal est une
 observation que fait le serveur lui-même, jamais une affirmation du client.
 
 Il s'adresse à tout code PHP qui reçoit des formulaires d'inconnus et veut tenir le pourriel à l'écart sans faire
