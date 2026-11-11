@@ -7,4 +7,6 @@ declare(strict_types=1);
  */
 return [
     'paths' => ['src', 'tests'],
+    // The package is released from its own repository: its CHANGELOG uses every section.
+    'docs' => ['public' => true],
 ];
