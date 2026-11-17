@@ -1,6 +1,6 @@
 {
     "name": "phil/spam-protection",
-    "description": "Spam signals without a captcha, in plain PHP: signed submission tokens, timing, a proof of work, content rules, and the inspection that collects their signals",
+    "description": "Spot spam in a form submission without a captcha, in plain PHP: signed tokens, filling time, a small proof of work and content rules.",
     "license": "MIT",
     "type": "library",
     "keywords": [
